@@ -28,6 +28,7 @@ import android.util.AttributeSet;
 public class LoaderTextView extends AppCompatTextView implements LoaderView {
 
     private LoaderController loaderController;
+    private boolean useDarkerColorBoldText;
 
     public LoaderTextView(Context context) {
         super(context);
@@ -51,6 +52,7 @@ public class LoaderTextView extends AppCompatTextView implements LoaderView {
         loaderController.setHeightWeight(typedArray.getFloat(R.styleable.loader_view_height_weight, LoaderConstant.MAX_WEIGHT));
         loaderController.setUseGradient(typedArray.getBoolean(R.styleable.loader_view_use_gradient, LoaderConstant.USE_GRADIENT_DEFAULT));
         loaderController.setCorners(typedArray.getInt(R.styleable.loader_view_corners, LoaderConstant.CORNER_DEFAULT));
+        useDarkerColorBoldText = typedArray.getBoolean(R.styleable.loader_view_use_darker_color_bold_text, true);
         typedArray.recycle();
     }
 
@@ -87,7 +89,7 @@ public class LoaderTextView extends AppCompatTextView implements LoaderView {
     @Override
     public void setRectColor(Paint rectPaint) {
         final Typeface typeface = getTypeface();
-        if (typeface != null && typeface.getStyle()== Typeface.BOLD ) {
+        if (typeface != null && typeface.getStyle()== Typeface.BOLD && useDarkerColorBoldText) {
             rectPaint.setColor(LoaderConstant.COLOR_DARKER_GREY);
         } else {
             rectPaint.setColor(LoaderConstant.COLOR_DEFAULT_GREY);
