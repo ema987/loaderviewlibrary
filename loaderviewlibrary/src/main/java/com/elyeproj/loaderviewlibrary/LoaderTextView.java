@@ -21,6 +21,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -29,6 +30,8 @@ public class LoaderTextView extends AppCompatTextView implements LoaderView {
 
     private LoaderController loaderController;
     private boolean useDarkerColorBoldText;
+    private int defaultColorResource;
+    private int darkerColorResource;
 
     public LoaderTextView(Context context) {
         super(context);
@@ -53,6 +56,8 @@ public class LoaderTextView extends AppCompatTextView implements LoaderView {
         loaderController.setUseGradient(typedArray.getBoolean(R.styleable.loader_view_use_gradient, LoaderConstant.USE_GRADIENT_DEFAULT));
         loaderController.setCorners(typedArray.getInt(R.styleable.loader_view_corners, LoaderConstant.CORNER_DEFAULT));
         useDarkerColorBoldText = typedArray.getBoolean(R.styleable.loader_view_use_darker_color_bold_text, true);
+        defaultColorResource = typedArray.getColor(R.styleable.loader_view_default_color, ContextCompat.getColor(getContext(), R.color.default_color));
+        darkerColorResource = typedArray.getColor(R.styleable.loader_view_darker_color, ContextCompat.getColor(getContext(), R.color.darker_color));
         typedArray.recycle();
     }
 
@@ -90,9 +95,9 @@ public class LoaderTextView extends AppCompatTextView implements LoaderView {
     public void setRectColor(Paint rectPaint) {
         final Typeface typeface = getTypeface();
         if (typeface != null && typeface.getStyle()== Typeface.BOLD && useDarkerColorBoldText) {
-            rectPaint.setColor(LoaderConstant.COLOR_DARKER_GREY);
+            rectPaint.setColor(darkerColorResource);
         } else {
-            rectPaint.setColor(LoaderConstant.COLOR_DEFAULT_GREY);
+            rectPaint.setColor(defaultColorResource);
         }
     }
 
