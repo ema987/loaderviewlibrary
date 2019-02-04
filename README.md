@@ -59,7 +59,15 @@ Provide both TextView and ImageView the ability to show shimmer (animation loade
 
 8. Other feature of TextView and ImageView is still applicable.
 
-9. Reset and show shimmer (animation loader) again by calling the below API
+9. Use a custom shimmer color (note: if set, point 7 will not apply, your color will be used even if the Text Style is BOLD)
+    ```xml
+    <com.elyeproj.loaderviewlibrary.LoaderTextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         app:custom_color="@android:color/holo_green_dark" />
+    ```
+    
+10. Reset and show shimmer (animation loader) again by calling the below API
     ```java
     myLoaderTextView.resetLoader();
     myLoaderImageView.resetLoader();
@@ -72,14 +80,15 @@ Android SDK API Version 15 and above.
 On your module `build.gradle`, add
 
     dependencies {
-        implementation 'com.elyeproj.libraries:loaderviewlibrary:1.4.1'
+        implementation 'com.elyeproj.libraries:loaderviewlibrary:1.5.0'
     }
 
-## What's new in 1.4.1
-1. Fix memory leak issue
+## What's new in 1.5.0
+1. Add custom color attribute
 
-## What's new in 1.4.0
-1. Support Corner Rectangle shimmer
+## What's new in 1.4.x
+1. (1.4.1) Fix memory leak issue
+2. (1.4.0) Support Corner Rectangle shimmer
 
 ## What's new in 1.3.0
 1. Support AppCompat
